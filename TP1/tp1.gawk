@@ -12,16 +12,11 @@ match ($0 , /<SAIDA>(.*)<\/SAIDA>/, locais) {
 }
 
 match ($0 , /<IMPORTANCIA>(.*)<\/IMPORTANCIA>/, aux) {
-	for (g in aux) total += g
+	for (g in aux){
+		sub(/,/,".", g);
+		total += g;
+	}
 }
-
-#Não está feito! Última alínea
-match ($0 , /<TIPO>Parques de estacionamento<\/TIPO>/, aux) {
-	for (g in aux) totalp += g
-}
-
-
-
 
 
 END {
@@ -40,5 +35,4 @@ END {
 	print "\n"
 
 	printf ("O total gasto em parques foi %s€\n", totalp)
-
 }
