@@ -1,0 +1,22 @@
+@include "q1.gawk"
+@include "q2.gawk"
+@include "q3.gawk"
+@include "q4.gawk"
+
+BEGIN {
+    op["q1"] = "Número de entradas em cada dia do mês"
+    op["q2"] = "Lista de locais de saída"
+    op["q3"] = "Total gasto no mês"
+    op["q4"] = "Total gasto no mês apenas em parques de estacionamento"
+
+    l = "<li><a href=%s>%s</a></li>"
+    pth = "Testes/"
+
+    indice()
+}
+
+
+function indice() {
+    for (k in op)
+        printf (l, k ".html" , op[k]) > "Testes/indice.html"
+}
