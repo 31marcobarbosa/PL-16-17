@@ -28,11 +28,14 @@ match ($0 , /<IMPORTANCIA>(.*)<\/IMPORTANCIA>/, auxcusto) {
 		custo[i] = auxcusto[1]
 }
 
+
 ############## -------- ####################
 
+
 END {
+	print ("  Data      Nr Entradas")
 	for (dia in dias)
-		printf ("%s : %s\n", dia, dias[dia])
+		printf ("%s:      %s\n", dia, dias[dia])
 
 	print "\n"
 
@@ -50,7 +53,6 @@ END {
 		if (tipo[j] == "Parques de estacionamento")
 			totalp += custo[j]
 	}
-
 
 	printf ("O total gasto em parques foi %s€\n", totalp)
 }
