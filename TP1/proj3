@@ -1,0 +1,15 @@
+BEGIN {
+	contacantores = 0;
+}
+
+match($0 , /singer: (.*)/ , aux) {
+	cantores[aux[1]]
+	contaautores++
+}
+
+
+END {
+	# Não está a contar bem
+	for (a in cantores) print a
+	printf ("No total são %s autores.\n", contaautores)
+}
