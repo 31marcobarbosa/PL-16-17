@@ -1,4 +1,4 @@
-BEGIN {	print "\n"
+BEGIN {	 PROCINFO["sorted_in"] = "@ind_str_asc"
 				total = 0
 				totalp = 0
 				i = 0}
@@ -33,26 +33,23 @@ match ($0 , /<IMPORTANCIA>(.*)<\/IMPORTANCIA>/, auxcusto) {
 
 
 END {
-	print ("  Data      Nr Entradas")
+	print ("  Data      Nr Entradas") > "entradas.html"
 	for (dia in dias)
-		printf ("%s:      %s\n", dia, dias[dia])
+		printf ("%s:      %s\n", dia, dias[dia]) > "entradas.html"
 
-	print "\n"
 
+	print ("  Local     Nr saídas") > "locaissaida.html"
 	for (l in local)
-		printf ("%s : %s\n", l , local[l])
-
-	print "\n"
+		printf ("%s : %s\n", l , local[l]) > "locaissaida.html"
 
 
-	printf ("O total gasto foi %s€\n", total)
+	printf ("O total gasto foi %s€\n", total) > "totalgasto.html"
 
-	print "\n"
 
 	for (j = 0 ; j <= i ; j ++ ){
 		if (tipo[j] == "Parques de estacionamento")
 			totalp += custo[j]
 	}
 
-	printf ("O total gasto em parques foi %s€\n", totalp)
+	printf ("O total gasto em parques foi %s€\n", totalp) > "totalparques.html"
 }
