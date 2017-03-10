@@ -45,7 +45,6 @@ END {
 
 	printf ("O total gasto foi %s€\n", total) > "totalgasto.html"
 
-
 	for (j = 0 ; j <= i ; j ++ ){
 		if (tipo[j] == "Parques de estacionamento")
 			totalp += custo[j]
