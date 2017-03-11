@@ -2,8 +2,12 @@
 @include "q2.gawk"
 @include "q3.gawk"
 @include "q4.gawk"
+@include "header.gawk"
 
 BEGIN {
+
+	
+
     op["q1"] = "Número de entradas em cada dia do mês"
     op["q2"] = "Lista de locais de saída"
     op["q3"] = "Total gasto no mês"
