@@ -2,7 +2,7 @@
 @include "q2.gawk"
 @include "q3.gawk"
 @include "q4.gawk"
-@include "header.gawk"
+#@include "header.gawk"
 
 BEGIN {
 
