@@ -10,11 +10,17 @@ function norm(str) {
 
 {
 	if (norm($1) == "singer") {
-			x = split($2,a,";")
-			for (j in a) gsub(/^ /,"",a[j])
-			for (j in a) gsub(/ $/,"",a[j])
-			for (j in a) cant[a[j]]
+		if ($2 != " ?"){
+			gsub(",",";")
+			x = split($2, a, ";")
+			for (j in a) {
+				gsub("&","e",a[j])
+				gsub(/ .$/,"",a[j])
+			 	gsub(/^ /,"",a[j])
+	 	 		gsub(/ $/,"",a[j])
+			 	cant[a[j]]}
 		}
+	}
 }
 
 

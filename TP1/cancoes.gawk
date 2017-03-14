@@ -4,8 +4,14 @@ BEGIN {
 	PROCINFO["sorted_in"] = "@ind_str_asc";
 }
 
+
+function norm(str) {
+  return tolower(str);
+}
+
+
 {
-	if ($1 == "title") {
+	if (norm($1) == "title") {
 			titles[i] = $2
 			gsub("*","",titles[i])
 			gsub(/^ /,"",titles[i])
@@ -16,7 +22,7 @@ BEGIN {
 
 
 {
-	if ($1 == "author") {
+	if (norm($1) == "author") {
 		autores[i] = $2
 		gsub(/^ /,"",autores[i])
 		gsub(/ $/,"",autores[i])
