@@ -1,7 +1,7 @@
 
 BEGIN {
 		PROCINFO["sorted_in"] = "@ind_str_asc"
-		enc = "<html> <head> <meta charset='UTF-8'/> <style> table, th, td { border: 1px solid black;} </style> </head> <body>"
+		enc = "<html> <head> <meta charset='UTF-8'/> <style> table, th, td { border: 1px solid black;} body{ background-image url: ;} h1{text-align: center;}</style> </head> <body>"
 		fmt = "<li><b>%s:</b> %s</li>\n"
 		header  = "Testes/indice.html"
 		q1 = "Testes/q1.html"
@@ -27,9 +27,9 @@ BEGIN {
 		pth="Testes/"
 		end  = "</body> </html>"		
 }
-
+l
 #questao1
-match($0, "<DATA_ENTRADA>(.*)</DATA_ENTRADA>", entradas) {
+match ($0 , "<DATA_ENTRADA>(.*)</DATA_ENTRADA>", entradas) {
 	if (entradas[1] != "null")
 			dias[entradas[1]]++
 }
@@ -51,16 +51,20 @@ match ($0 , "<TIPO>(.*)</TIPO>", auxtipo) {
 				i++
 }
 
-match ($0 , /<IMPORTANCIA>(.*)<\/IMPORTANCIA>/, auxcusto) {
+match ($0 , "<IMPORTANCIA>(.*)</IMPORTANCIA>", auxcusto) {
 				sub(/,/,".", auxcusto[1])
 				custo[i] = auxcusto[1]
 }
 
-match($0 , "<NIF>(.*)</NIF>", nifs){
+
+#----- CABEÇALHO ----------
+
+
+match ($0 , "<NIF>(.*)</NIF>", nifs){
 	nif = nifs[1];
 }
 
-match($0, "<MES_EMISSAO>(.*)</MES_EMISSAO>",meses){
+match( $0 , "<MES_EMISSAO>(.*)</MES_EMISSAO>",meses){
 	mes = meses[1];
 }
 
@@ -80,11 +84,11 @@ match ($0 , "<CODIGO_POSTAL>(.*)</CODIGO_POSTAL>", postais) {
 	codigo = postais[1];
 }
 
-match ($0, "<MATRICULA>(.*)</MATRICULA>",matriculas){
+match ($0 , "<MATRICULA>(.*)</MATRICULA>",matriculas){
 	matricula = matriculas[1];
 }
 
-match ($0, "<REF_PAGAMENTO>(.*)</REF_PAGAMENTO>",refs){
+match ($0 , "<REF_PAGAMENTO>(.*)</REF_PAGAMENTO>",refs){
 	ref = refs[1];
 }
 
@@ -151,7 +155,6 @@ function questao4(){
 	
 	print end > q4
 }
-
 function indice() {
     for (k in op)
         printf (l, k ".html" , op[k]) > "Testes/indice.html"
@@ -173,10 +176,14 @@ END{
 	printf(bold "%s" newLine newLine,"NIF: ",nif) > header
 
 	printf(bold "%s, " "%s, " "%s" newLine newLine,"Morada: ",morada,locale,codigo) > header
+
+	print div > header
 	
 	printf(newLine bold, "Consulte:") > header
 
 	indice()
+
+	print div > header
 
 	questao1()
 
