@@ -9,6 +9,8 @@ BEGIN {
 		if ($1 == "author"){
 					gsub(/^ /,"",$2)
 					gsub(/ $/,"",$2)
+					gsub("; ", ";", $2)
+					gsub(" ;", ";", $2)
 					autores[$2]++
 			}
 		}

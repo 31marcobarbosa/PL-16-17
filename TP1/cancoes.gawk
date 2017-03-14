@@ -1,29 +1,37 @@
-BEGIN{
+BEGIN {
 	FS= ":"
 	i = 0
+	PROCINFO["sorted_in"] = "@ind_str_asc";
 }
 
-match($0, /title:(.*)/ titlessaux) {
-	titles[i] = titlesaux[1]
+{
+	if ($1 == "title") {
+			titles[i] = $2
+			gsub("*","",titles[i])
+			gsub(/^ /,"",titles[i])
+			gsub(/ $/,"",titles[i])
+
+		}
 }
 
-match($0, /author:(.*)/ autoresaux){
-	gsub(/^ /,"",autores[i])
-	gsub(/ $/,"",autores[i])
-	i++
+
+{
+	if ($1 == "author") {
+		autores[i] = $2
+		gsub(/^ /,"",autores[i])
+		gsub(/ $/,"",autores[i])
+		i++
+		}
 }
-
-
 
 
 END {
 
 for ( j = 0 ; j < i ; j++)
-	cancoes[autores[j]] = titles[j]
+	cancoes[autores[j]] = titles[j] "," cancoes[autores[j]]
 
 for (c in cancoes) {
-	printf ("%s -> %s\n" , c , cancoes[c])
-}
+	printf ("%s -> %s\n" , c , cancoes[c])}
 
 
 }
