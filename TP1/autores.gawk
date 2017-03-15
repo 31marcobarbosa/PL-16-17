@@ -12,8 +12,8 @@ function norm(str) {
 		if (norm($1) == "author"){
 					gsub(/^ /,"",$2)
 					gsub(/ *$/,"",$2)
-					gsub("; ", ";", $2)
-					gsub(" ;", ";", $2)
+					gsub("; ", ";",$2)
+					gsub(" ;", ";",$2)
 					autores[$2]++
 
 			}
@@ -22,6 +22,6 @@ function norm(str) {
 
 END {
 	for (a in autores) {
-		printf ("%s-> %s \n ", a , autores[a])
+		printf ("%s -> %s \n ", a , autores[a])
 	}
 }
