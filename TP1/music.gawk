@@ -1,11 +1,11 @@
+@include "autores.gawk"
+@include "cantores.gawk"
+@include "cancoes.gawk"
 
 BEGIN{
 	PROCINFO["sorted_in"] = "@ind_str_asc"
 	enc = "<html> <head> <meta charset='UTF-8'/> <style> table, th, td { border: 1px solid black;} body{ background-color: moccasin; div { text-align: justify;} div img { display: inline-block; width: 20px; height: 20px;} div:after { content: ''; display: inline-block; width: 100%;}  h1{text-align: center;}</style> </head> <body>"
 	music = "Testes/music.html"
-	cant = "Testes/cant.html"
-	canc = "Testes/canc.html"
-	autor = "Testes/autor.html"
 	listI = "<li>"
 	listE = "</li>\n"
 	parI = "<p>"
@@ -15,9 +15,9 @@ BEGIN{
 	bold = "<b> %s </b>\n"
 	newLine = "<br>"
 	div = "<hr></hr>"
-	ope["que1"] = "Total de cantores e a lista dos seus nomes"
-	ope["que2"] = "Total de canções de um dado autor"
-	ope["que3"] = "Enunciar todos os autores e as suas musicas correspondentes"
+	ope["cant"] = "Total de cantores e a lista dos seus nomes"
+	ope["canc"] = "Total de canções de um dado autor"
+	ope["aut"] = "Enunciar todos os autores e as suas musicas correspondentes"
 	l = "<li><a href=%s>%s</a></li>"
 	end = "</body> </html>"
 }
@@ -25,18 +25,6 @@ BEGIN{
 function menu(){
 	for (k in ope)
 		printf(l , k".html" , ope[k]) > music
-}
-
-function cantores(){
-	print "<p><i><a href='music.html'>Voltar</a></i></p>" > cant
-}
-
-function cancao(){
-	print "<p><i><a href='music.html'>Voltar</a></i></p>" > canc
-}
-
-function autores(){
-	print "<p><i><a href='music.html'>Voltar</a></i></p>" > autor
 }
 
 END{
@@ -64,12 +52,6 @@ END{
 	print div > music
 
 	menu()
-
-	cantores()
-
-	cancao()
-
-	autores()
 	
 	print div > music
 
