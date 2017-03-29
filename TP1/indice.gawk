@@ -1,7 +1,7 @@
 
 BEGIN {
 		PROCINFO["sorted_in"] = "@ind_str_asc"
-		enc = "<html> <head> <meta charset='UTF-8'/> <style> table, th, td { border: 1px solid black;} body{ background-image url: ;} h1{text-align: center;}</style> </head> <body>"
+		enc = "<html> <head> <meta charset='UTF-8'/> <style> table, th, td { border: 1px solid black;} body{ background-color: lightgreen;} h1{text-align: center;}</style> </head> <body>"
 		fmt = "<li><b>%s:</b> %s</li>\n"
 		header  = "Testes/indice.html"
 		q1 = "Testes/q1.html"
@@ -27,7 +27,7 @@ BEGIN {
 		pth="Testes/"
 		end  = "</body> </html>"		
 }
-l
+
 #questao1
 match ($0 , "<DATA_ENTRADA>(.*)</DATA_ENTRADA>", entradas) {
 	if (entradas[1] != "null")
