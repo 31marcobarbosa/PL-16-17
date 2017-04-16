@@ -13,35 +13,34 @@ gboolean iterador(gpointer key, gpointer value, gpointer data);
 
 %}
 %%
- text = fopen("textoProcessado.txt", "w");
 
 \'m {
-	printf("%s"," am");
+	fprintf(yyout,"%s"," am");
 }
 
 \'s {
-	printf("%s"," is");
+	fprintf(yyout,"%s"," is");
 }
 \'re {
-	printf("%s"," are");
+	fprintf(yyout,"%s"," are");
 }
 \'ll {
-	printf("%s"," will");
+	fprintf(yyout,"%s"," will");
 }
 \'ve {
-	printf("%s"," have");
+	fprintf(yyout,"%s"," have");
 }
 an\'t {
-	printf("%s","annot");
+	fprintf(yyout,"%s","annot");
 }
 n\'t {
-	printf("%s"," not");
+	fprintf(yyout,"%s"," not");
 }
 [Ww]on\'t {
-	printf("%s"," will not");
+	fprintf(yyout,"%s"," will not");
 }
 \'d {
-	printf("%s"," would");
+	fprintf(yyout,"%s"," would");
 }
 
 (to\ |can\ |could\ |shall\ |should\ |will\ |would\ |may\ |might\ ) {
@@ -105,12 +104,12 @@ gint comparador(gconstpointer aPtr, gconstpointer bPtr){
 }
 
 gboolean iterador (gpointer key, gpointer value, gpointer data){
-	
+
 	printf("%s\n",value);
 
-	fprintf(text,"to %s\n",value); 	
-	
-	
+	fprintf(yyout,"to %s\n",value);
+
+
 	return FALSE;
 }
 
@@ -120,11 +119,11 @@ int main (int argc, char* argv[]) {
 
 	if(argc == 2)
 		yyin = fopen(argv[1], "r");
-    
-	
+
+	yyout = fopen("textoProcessado.txt", "w");
 	yylex();
 
 	g_tree_foreach(verbosPrint, (GTraverseFunc)iterador, NULL);
-	
+
     return 0;
 }
