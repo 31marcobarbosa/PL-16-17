@@ -27,7 +27,7 @@ void verbos (char* yytext, int indice) {
 			gint* i = g_new(gint,1);
 			gpointer p = g_tree_search(verbos, (GCompareFunc) func ,verb);
 			gint cont = *(gint*) gp;
-			(*i) = num + 1;
+			(*i) = cont + 1;
 			g_tree_replace(verbos,verb,i);
 		}
 	}
