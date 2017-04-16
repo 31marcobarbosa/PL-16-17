@@ -36,11 +36,11 @@ n\'t {
 	printf("%s"," would");
 }
 
-(to\ |can\ |could\ |shall\ |should\ |will\ |would\ |may\ |might\ )[a-zA-Z]* {
+(to\ |can\ |could\ |shall\ |should\ |will\ |would\ |may\ |might\ ) {
 	verbos(yytext,1);
 }
 
-(do\ |does\ |did\ )[a-zA-Z]*\ [a-zA-Z]*.*\? {
+(do\ |does\ |did\ ){
 	verbos(yytext,2);
 }
 
