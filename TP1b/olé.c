@@ -1,6 +1,7 @@
 
 GTree* verbos;
 
+#include <string.h>
 
 void verbos (char* yytext, int indice) {
 /* Separar o verbo do resto*/
@@ -36,11 +37,16 @@ gboolean func (gpointer k, gpointer v, gpointer cnt){
 		return strcmp (k , cnt) == 0;
 }
 
+// recebe dois apontadores para uma string -> verificar se esta correto
 gint comparador(gconstpointer aPtr, gconstpointer bPtr){
+	/*[Ma]=
 	gint i , j;
 	i = *(gint *)iPtr;
   	j = *(gint *)jPtr;
 
 	if(i < j) return 1;
 	return -1;
+	*/
+	// verificar
+	return strcmp(aPtr,bPtr);
 }
