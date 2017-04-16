@@ -1,0 +1,58 @@
+%option noyywrap
+%{
+#include <string.h>
+#include <glib.h>
+#include "olé.c"
+%}
+%%
+  FILE* text = fopen("textoProcessado.txt", "w");
+
+\'m {
+	printf("%s"," am");
+}
+
+\'s {
+	printf("%s"," is");
+}
+\'re {
+	printf("%s"," are");
+}
+\'ll {
+	printf("%s"," will");
+}
+\'ve {
+	printf("%s"," have");
+}
+an\'t {
+	printf("%s","annot");
+}
+n\'t {
+	printf("%s"," not");
+}
+[Ww]on\'t {
+	printf("%s"," will not");
+}
+\'d {
+	printf("%s"," would");
+}
+
+(to\ |can\ |could\ |shall\ |should\ |will\ |would\ |may\ |might\ )[a-zA-Z]* {
+	verbos(yytext,1);
+}
+
+(do\ |does\ |did\ )[a-zA-Z]*\ [a-zA-Z]*.*\? {
+	verbos(yytext,2);
+}
+
+
+%%
+
+int main (int argc, char* argv[]) {
+
+	if(argc == 2)
+		yyin = fopen(argv[1], "r");
+    	yylex();
+
+
+    return 0;
+	}
