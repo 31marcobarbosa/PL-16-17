@@ -1,8 +1,9 @@
 %option noyywrap
 %{
 #include <string.h>
+#include <stdio.h>
 #include <glib.h>
-//#include "olé.c"
+
 
 GTree * verbosPrint;
 FILE * text;
@@ -117,10 +118,11 @@ int main (int argc, char* argv[]) {
 
 	verbosPrint = g_tree_new(comparador);
 
+	yyout = fopen("textoProcessado.txt", "w");
+	
 	if(argc == 2)
 		yyin = fopen(argv[1], "r");
 
-	yyout = fopen("textoProcessado.txt", "w");
 	yylex();
 
 	g_tree_foreach(verbosPrint, (GTraverseFunc)iterador, NULL);
