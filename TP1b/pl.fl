@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <glib.h>
 
-
 GTree * verbosPrint;
 FILE * text;
 void verbos(char *yytext,int indice);
@@ -44,11 +43,11 @@ n\'t {
 	fprintf(text,"%s"," would");
 }
 
-(to\ |can\ |could\ |shall\ |should\ |will\ |would\ |may\ |might\ )\ [a-z]* {
+(can|could|shall|should|will|would|may|might)\ [a-z]* {
 	verbos(yytext,1);
 }
 
-(do\ |does\ |did\ )\ [a-z]*\ [a-z]* {
+(do|does|did)\ [a-z]*\ [a-z]* {
 	verbos(yytext,2);
 }
 
@@ -58,10 +57,13 @@ n\'t {
 
 void verbos (char* yytext, int indice) {
 /* Separar o verbo do resto*/
+		printf("entrei na putinha com a pilinha \n");
+		printf("TEXT: %s\n", yytext);
 		int cont = 0;
 		char* verb = (char*)malloc(sizeof(char) * 32);
 		char* token =  (char *)malloc(sizeof(char) * 32);
 		token = strtok(yytext, " ");
+		printf("TOKEN: %s\n", token);
 		while(token != NULL) {
 				token = strtok(NULL, " ");
 				if (cont < indice && token != NULL) {
@@ -70,17 +72,17 @@ void verbos (char* yytext, int indice) {
 				else break;
 				cont++;
 		}
-
+		printf("VERB %s\n", verb);
 		int *gp = (int *) g_tree_lookup(verbosPrint,verb);
 		if (gp == NULL && (strlen(verb) > 1) ){
 			gint* i = g_new(gint,1);
 			(*i) = 1;
 			g_tree_insert(verbosPrint,verb,i);
-			printf("%s", verb);
+			
 		}
 		else {
 			gint* i = g_new(gint,1);
-			gpointer p = g_tree_search(verbosPrint, (GCompareFunc) func ,verb);
+			gpointer p = g_tree_lookup(verbosPrint,verb);
 			gint cont = *(gint*) p;
 			(*i) = cont + 1;
 			g_tree_replace(verbosPrint,verb,i);
@@ -88,29 +90,16 @@ void verbos (char* yytext, int indice) {
 	}
 
 
-gboolean func (gpointer k, gpointer v, gpointer cnt){
-		return strcmp (k , cnt) == 0;
-}
-
 // recebe dois apontadores para uma string -> verificar se esta correto
 gint comparador(gconstpointer aPtr, gconstpointer bPtr){
-	/*[Ma]=
-	gint i , j;
-	i = *(gint *)iPtr;
-  	j = *(gint *)jPtr;
-
-	if(i < j) return 1;
-	return -1;
-	*/
-	// verificar
-	return strcmp(aPtr,bPtr);
+		return strcmp(aPtr,bPtr);
 }
 
 gboolean iterador (gpointer key, gpointer value, gpointer data){
 
-	printf("%s\n",value);
 
-	fprintf(yyout,"to %s\n",value);
+
+	fprintf(yyout,"to %s, %d\n",key, *(gint*)value);
 
 
 	return FALSE;
@@ -131,4 +120,4 @@ int main (int argc, char* argv[]) {
 	g_tree_foreach(verbosPrint, (GTraverseFunc)iterador, NULL);
 
     return 0;
-}
+	}
