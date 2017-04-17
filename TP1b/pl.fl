@@ -16,32 +16,32 @@ gboolean iterador(gpointer key, gpointer value, gpointer data);
 %%
 
 \'m {
-	fprintf(yyout,"%s"," am");
+	fprintf(text,"%s"," am");
 }
 
 \'s {
-	fprintf(yyout,"%s"," is");
+	fprintf(text,"%s"," is");
 }
 \'re {
-	fprintf(yyout,"%s"," are");
+	fprintf(text,"%s"," are");
 }
 \'ll {
-	fprintf(yyout,"%s"," will");
+	fprintf(text,"%s"," will");
 }
 \'ve {
-	fprintf(yyout,"%s"," have");
+	fprintf(text,"%s"," have");
 }
 an\'t {
-	fprintf(yyout,"%s","annot");
+	fprintf(text,"%s","annot");
 }
 n\'t {
-	fprintf(yyout,"%s"," not");
+	fprintf(text,"%s"," not");
 }
 [Ww]on\'t {
-	fprintf(yyout,"%s"," will not");
+	fprintf(text,"%s"," will not");
 }
 \'d {
-	fprintf(yyout,"%s"," would");
+	fprintf(text,"%s"," would");
 }
 
 (to\ |can\ |could\ |shall\ |should\ |will\ |would\ |may\ |might\ ) {
@@ -119,7 +119,7 @@ int main (int argc, char* argv[]) {
 
 	verbosPrint = g_tree_new(comparador);
 
-	yyout = fopen("textoProcessado.txt", "w");
+	text = fopen("textoProcessado.txt", "w");
 
 	if(argc == 2)
 		yyin = fopen(argv[1], "r");
