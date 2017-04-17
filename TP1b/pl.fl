@@ -55,6 +55,7 @@ n\'t {
 
 %%
 
+
 void verbos (char* yytext, int indice) {
 /* Separar o verbo do resto*/
 		int cont = 0;
@@ -119,7 +120,7 @@ int main (int argc, char* argv[]) {
 	verbosPrint = g_tree_new(comparador);
 
 	yyout = fopen("textoProcessado.txt", "w");
-	
+
 	if(argc == 2)
 		yyin = fopen(argv[1], "r");
 
