@@ -120,6 +120,7 @@ int main (int argc, char* argv[]) {
 	verbosPrint = g_tree_new(comparador);
 
 	text = fopen("textoProcessado.txt", "w");
+	yyout = text;
 
 	if(argc == 2)
 		yyin = fopen(argv[1], "r");
