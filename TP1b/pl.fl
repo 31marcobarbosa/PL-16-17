@@ -57,7 +57,6 @@ n\'t {
 
 void verbos (char* yytext, int indice) {
 /* Separar o verbo do resto*/
-		printf("entrei na putinha com a pilinha \n");
 		printf("TEXT: %s\n", yytext);
 		int cont = 0;
 		char* verb = (char*)malloc(sizeof(char) * 32);
@@ -80,7 +79,7 @@ void verbos (char* yytext, int indice) {
 			g_tree_insert(verbosPrint,verb,i);
 			
 		}
-		else {
+		else{
 			gint* i = g_new(gint,1);
 			gpointer p = g_tree_lookup(verbosPrint,verb);
 			gint cont = *(gint*) p;
@@ -96,12 +95,7 @@ gint comparador(gconstpointer aPtr, gconstpointer bPtr){
 }
 
 gboolean iterador (gpointer key, gpointer value, gpointer data){
-
-
-
 	fprintf(yyout,"to %s, %d\n",key, *(gint*)value);
-
-
 	return FALSE;
 }
 
