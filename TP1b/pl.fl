@@ -46,10 +46,12 @@ n\'t {
 
 (to\ |can\ |could\ |shall\ |should\ |will\ |would\ |may\ |might\ ) {
 	verbos(yytext,1);
+	ECHO;
 }
 
 (do\ |does\ |did\ ) {
 	verbos(yytext,2);
+	ECHO;
 }
 
 
