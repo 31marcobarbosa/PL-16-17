@@ -114,37 +114,37 @@ gboolean iterador (gpointer key, gpointer value, gpointer data){
 }
 
 void initFileHtml(FILE* menu, FILE* text1, FILE* infoVerbos){
-	
+
 	char* head="<html> <head> <meta charset='UTF-8'> %s </head><body>";
-	char* headText="<style>\n body{\n background-color:#ADFF2F;\n }\n <.wrapper {\nwidth:600px;\nmargin: 0 auto;\n}\n\n#block1 {\nfloat:left;\n background-color:#F4A460;\nwidth:600px;\n}\n\n#block2\n{\n float:right;\n background-color: #B0C4DE;\n width: 600px;\n}\n</style>\n";
-	char* color="<style>\n body{\n background-color:#ADFF2F;\n}\n</style>\n";
+	char* headText="<style>\n body{\n background-color:#ffffff;\n }\n <.wrapper {\nwidth:600px;\nmargin: 0 auto;\n}\n\n#block1 {\nfloat:left;\n background-color:#ffd9b3;\nwidth:600px;\n}\n\n#block2\n{\n float:right;\n background-color: #cceeff;\n width: 600px;\n}\n</style>\n";
+	char* color="<style>\n body{\n background-color:#e6f9ff;\n}\n</style>\n";
 	char* ref="<li><a href=\"%s\"> %s </a></li>\n";
 	char* begin="<h1 align=\"center\"> Processador de Inglês Corrente </h1>\n";
 	char* back="<p><i><a href=\'menu.html\'>Voltar</a></i></p>";
-	char* div="<div class=\"wrapper\">\n <div id=\"block1\"><h3 align=\"center\"> Texto expandido </h3>";	
+	char* div="<div class=\"wrapper\">\n <div id=\"block1\"><h3 align=\"center\"> Texto expandido </h3>";
 	char* separator="<h3 align=\"center\">---------------------------------------------------------------------------------------------------------------------------------------------</h3>";
 
 	fprintf(menu,head,color);
 	fprintf(text1,head,headText);
 	fprintf(infoVerbos,head,color);
-	
+
 	fprintf(text1,"%s",back);
 	fprintf(infoVerbos,"%s",back);
-	
+
 	fprintf(menu,"%s",begin);
 	fprintf(text,"%s",begin);
 	fprintf(infoVerbos,"%s",begin);
-	
+
 	fprintf(text,"%s",separator);
 	fprintf(menu,"%s",separator);
 	fprintf(infoVerbos,"%s",separator);
-	
-	fprintf(text,"%s",div);	
+
+	fprintf(text,"%s",div);
 
 	fprintf(menu,"<p> Processador de Inglês Corrente que expande as habituais contrações presentes na língua inglesa.</p>");
 	fprintf(menu,"<p> As contrações que presentemente são expandidas são <i>I'm, I'll, W're can't, it's</i> e outras do genero das mesmas. </p>");
 	fprintf(menu,"<p> Pode decidir escolher visualizar o texto expandido, tendo como comparação o ficheiro original.</p>");
-	fprintf(menu,"<p> Ou pode, então, verificar os verbos presentes apos as palavras <i>can, could, shall, should, will, would, may, might </i>, considerando-se também a forma interrogativa dos verbos a precença de <i>do/does</i> ou <i>did</i> precedido do verbo no infinitivo.</p>");	
+	fprintf(menu,"<p> Ou pode, então, verificar os verbos presentes após as palavras <i>can, could, shall, should, will, would, may, might </i>, considerando-se também a forma interrogativa dos verbos a precença de <i>do/does</i> ou <i>did</i> precedido do verbo no infinitivo.</p>");
 	fprintf(menu,"%s",separator);
 
 	fprintf(menu,ref,"text.html","Verificar texto expandido.");
@@ -153,9 +153,9 @@ void initFileHtml(FILE* menu, FILE* text1, FILE* infoVerbos){
 
 
 void endFileHtml(FILE* menu,FILE* text, FILE* infoVerbos){
-	
+
 	char* end = "</body>\n</html>\n";
-	
+
 
 
 	fprintf(menu,"%s",end);
@@ -168,14 +168,14 @@ void printOriginalFile(char *file){
 	FILE* original;
 
 	original = fopen(file,"r");
-	
+
 	// ADICIONAR 1 <br> em cada \n do ficheiro
-		
+
 	fprintf(text,"</div>\n<div id=block2>\n<h3 align=\"center\"> Texto Original  </h3>");
 
-	copyText(text,original);	
-	// enviar resultado para o text e meter um 
-	
+	copyText(text,original);
+	// enviar resultado para o text e meter um
+
 	fprintf(text,"</div>\n</div>\n");
 
 }
@@ -187,7 +187,7 @@ void copyText(FILE* text, FILE* original){
 	while(fgets(buffer,10000,original) !=NULL){
 		buffer[ strcspn(buffer, "\r\n") ] = 0;
 		fprintf(text,"%s <br>\n",buffer);
-	}	
+	}
 
 }
 
@@ -195,19 +195,19 @@ void copyText(FILE* text, FILE* original){
 int main (int argc, char* argv[]) {
 
 	verbosPrint = g_tree_new(comparador);
-	
+
 
 
 	if(argc == 2)
 		yyin = fopen(argv[1], "r");
 
-//	printFirstFile(yyin);	
+//	printFirstFile(yyin);
 	yyout = fopen("text.html","w");
 	text = yyout;
 	yylex();
 
-	// meter a imprimir o ficheiro original no #2	
-	printOriginalFile(argv[1]);	
+	// meter a imprimir o ficheiro original no #2
+	printOriginalFile(argv[1]);
 
 	// percorrer a arvore e guardar no ficheiro os dados
 	char *beginList = "<ul>\n";
@@ -215,7 +215,7 @@ int main (int argc, char* argv[]) {
 	g_tree_foreach(verbosPrint, (GTraverseFunc)iterador, NULL);
 	char *endList = "</ul>\n";
 	fprintf(infoVerbos,"%s",endList);
-	
+
 	endFileHtml(menu,text,infoVerbos);
 
     return 0;
