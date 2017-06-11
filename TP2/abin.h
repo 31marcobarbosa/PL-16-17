@@ -27,12 +27,16 @@ int existeAbin(Tree t, char* nome);
 * Insere o elemento dado na árvore binária. Esta é ordenada pelo nome do elemento.
 * Retorna 0 se inserir, -1 se der erro.
 */
-int insertAbin(Tree t, char* nome, int tipo, int tamanho, int registo);
+int insereAbin(Tree t, char* nome, int tipo, int tamanho, int registo);
 
 /*
 * Retorna o tipo da variavel com o nome dado.
 */
 int tipoVar(Tree t, char* nome);
 
+/*
+* Retorna o registo da variavel com o nome dado.
+*/
+int registoVar (Tree t, char *nomeVar);
 
 #endif

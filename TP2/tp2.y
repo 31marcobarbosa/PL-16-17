@@ -43,7 +43,7 @@ iniciavar: tipo {tamanho = 1;} vars ';'
 		 ;
 
 
-vars: var 				{ variavelAtual = $1; aux = insertAbin(abin, variavelAtual, typo, tamanho, proxRegisto);  
+vars: var 				{ variavelAtual = $1; aux = insereAbin(abin, variavelAtual, typo, tamanho, proxRegisto);  
 						  if (aux ==-1) { yyerror("A variável já foi declarada!"); exit(0);} 
 						  else { fprintf(ficheiro,"PUSHN %d\n",tamanho); proxRegisto = proxRegisto+tamanho;} }
 	| var ',' vars 		{ ; }
@@ -115,6 +115,7 @@ parcela: elemento					{ ; }
 	   | parcela 'OPM' elemento	 	{ if( strcmp($2,"*") == 0 ) { fprintf(ficheiro,"MUL\n"); }
 									  if( strcmp($2,"/") == 0 ) { fprintf(ficheiro,"DIV\n"); }
 								      if( strcmp($2,"&&") == 0 ) { fprintf(ficheiro,"MUL\n"); } }
+								      if( strcmp($2,"%") == 0 ) { fprintf(ficheiro,"MOD\n"); } }
 	   ;
 
 elemento: var                      { aux = existeAbin(abin,$1); 
