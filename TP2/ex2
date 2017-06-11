@@ -1,0 +1,21 @@
+INICIOPROG
+
+    INTEIRO n, aux, i, menor;
+
+CORPOPROG
+
+    LER(n)
+    i = 0;
+    LER(aux)
+    menor = aux;
+    n = n - 1;
+    ENQUANTO(i < n)
+        LER(aux)
+        SE (aux < menor)
+            menor = aux;
+        FIMCONDICAO
+    FIMCICLO
+
+    ESCREVER(menor);
+
+FIMPROG

@@ -1,0 +1,28 @@
+INICIOPROG
+
+    INTEIRO leitura;
+    INTEIRO impares = 0;
+    ARRAY [20] array;
+
+CORPOPROG
+
+    LER(leitura)
+    SE (leitura == 0)
+        ESCREVER(0)
+    FIMCONDICAO
+
+    ENQUANTO( leitura > 0)
+        SE (leitura % 2 == 1)
+            array[impares] = leitura;
+            impares = impares + 1;
+        FIMCONDICAO
+        LER(leitura)
+    FIMCICLO
+
+    leitura = 0
+    ESCREVER(impares)
+    ENQUANTO(leitura < impares)
+        ESCREVER(array[leitura])
+    FIMCICLO
+
+FIMPROG
