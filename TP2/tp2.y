@@ -129,3 +129,21 @@ elemento: var                      { aux = existeAbin(abin,$1);
 		| '('cond')'
 		;
 
+
+%%
+#include "lex.yy.c"
+
+int yyerror(char *s) {
+	fprintf(stderr, "Erro na linha ( %d! ) %s\n", yylineno, s);
+	return 0;
+}
+
+int main(int argc, char* argv[]){
+
+	abin = initABin();
+	ficheiro = fopen("assembly.txt","w+");
+
+	yyparse();
+
+	return 0;
+}
