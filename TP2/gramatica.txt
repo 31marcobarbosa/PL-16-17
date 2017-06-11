@@ -1,0 +1,66 @@
+
+
+programa : INICIOPROG iniciavars CORPOPROG instrucoesprog FIMPROG
+
+iniciavars: iniciavar
+		  | iniciavar iniciavars
+		  ;
+
+iniciavar: tipo vars ';'
+		 | tipo '['numero']' vars ';'
+		 ;
+
+vars: var
+	| var ',' vars
+	;
+
+tipo: INTEIRO
+	| ARRAY
+	;
+
+instrucoesprog: instrucaoprog
+			  | instrucaoprog instrucoesprog
+			  ;
+
+instrucaoprog: atribuicao
+			 | condicao
+			 | ciclo
+			 | LER '('expressao')'
+			 | LER '('var '('expressao')'')'
+			 | ESCREVER '('expressao')'
+			 ;
+
+atribuicao: var '=' expressao
+		  | var
+		  ;
+
+condicao: SE '('cond')' instrucoesprog ou
+		;
+
+ou: FIMCONDICAO
+  | SENAO instrucoesprog FIMCONDICAO
+  ;
+
+ciclo: ENQUANTO '('cond') instrucoesprog FIMCICLO
+	 ;
+
+
+cond: expressao
+	| expressao OPR expressao
+	;
+
+expressao: parcela
+		 | expressao OPA parcela
+		 ;
+
+
+
+parcela: elemento
+	   | parcela 'OPM' elemento
+	   ;
+
+elemento: var
+		| var '('expressao')'
+		| numero
+		| '('cond')'
+		;
