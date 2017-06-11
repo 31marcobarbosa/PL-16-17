@@ -1,0 +1,18 @@
+INICIOPROG
+
+    INTEIRO n = 4;
+    INTEIRO produto = 1;
+    INTEIRO i = 0;
+    INTEIRO leitura;
+
+CORPOPROG
+
+    ENQUANTO (i < n)
+        LER(leitura);
+        produto = produto * leitura;
+        i = i + 1;
+    FIMCICLO
+
+    ESCREVER(produto)
+
+FIMPROG

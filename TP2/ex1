@@ -1,0 +1,41 @@
+INICIOPROG
+
+    INTEIRO x, j, auxEquals;
+    INTEIRO contador;
+    ARRAY [4] quadrado;
+
+CORPOPROG
+
+    contador = 0;
+    ENQUANTO (contador < 4)
+        LER(x);
+        quadrado[contador] = x;
+        contador = contador + 1;
+    FIMCICLO
+
+    x = 0;
+    contador = 0;
+    auxEquals = 0;
+
+    ENQUANTO (contador < 4)
+        j = 0;
+        x = 0;
+        ENQUANTO (j < 4)
+            SE (quadrado[contador] = quadrado[j])
+                x = x + 1;
+        FIMCICLO
+
+        SE (x == 4)
+            auxEquals = auxEquals + 1;
+        FIMCONDICAO
+
+        contador = contador + 1;
+    FIMCICLO
+
+    SE (auxEquals == 4)
+        ESCREVER(Os numeros podem formar um quadrado);
+    SENAO
+        ESCREVER(Os numeros nao podem formar um quadrado);
+    FIMCICLO
+
+FIMPROG
