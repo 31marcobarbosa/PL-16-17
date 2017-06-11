@@ -114,3 +114,24 @@ int tipoVar(Tree t, char* nome){
 
     return aux->tipo;
 }
+
+int registoVar (Tree t, char *nomeVar){
+    Tree aux;
+
+    if(t->nome==NULL)
+        return -1;
+    aux=t;
+    
+    for(aux = t ; aux && (strcmp(nomeVar,aux->nome) !=0 )){
+        if(strcmp(nomeVar,aux->nome) >0) 
+            aux=aux->dir;
+
+        else 
+            aux=aux->esq;
+    }
+    
+    if(aux==NULL)
+        return -1;
+
+    return aux->registo; 
+}
